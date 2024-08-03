@@ -5,7 +5,7 @@ export default class Song_femtanyl_KATAMARI extends Song {
         super(
             'femtanyl_KATAMARI',
             'KATAMARI',
-            'famtanyl',
+            'femtanyl',
             170,
             '/music/katamari.mp3'
         );

@@ -69,6 +69,7 @@ export default class ChartLoader {
                 const instructionClass = this.instructions.get(instruction);
                 const instructionInstance = new instructionClass() as Instruction;
 
+                instructionInstance.raw = line;
                 instructionInstance.load(chart, args);
                 chart.instructions.push(instructionInstance);
 

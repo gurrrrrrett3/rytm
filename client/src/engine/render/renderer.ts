@@ -1,6 +1,6 @@
 import Engine from "../core/engine";
 import Debug from "../util/debug/debug";
-import { ProfilerStep } from "../util/debug/profilerStep";
+import { ProfilerStep } from "../util/debug/enum/profilerStep";
 import { FrameTimerMode } from "./enum/frameTimerMode";
 import GradientStorage from "./gradients/gradientStorage";
 
@@ -57,6 +57,7 @@ export default class Renderer {
         Engine.inputManager.render(this.context);
 
         Debug.renderLiveDebugValues(this.context);
+        Debug.renderInstructionDebug(this.context);
 
         Debug.profile(ProfilerStep.EndFrame)
 

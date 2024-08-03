@@ -1,9 +1,11 @@
-import { ProfilerStep } from "./profilerStep";
+import Engine from "../../core/engine";
+import { ProfilerStep } from "./enum/profilerStep";
 
 export default class Debug {
 
     public static enabled: boolean = true;
     public static uiDebugEnabled: boolean = false;
+    public static instructionDebugEnabled: boolean = true;
 
     public static liveDebugValues: {
         [key: string]: {
@@ -42,6 +44,18 @@ export default class Debug {
                 delete this.liveDebugValues[key];
             }
         })
+    }
+
+    public static renderInstructionDebug(context: CanvasRenderingContext2D) {
+        if (!this.enabled || !this.instructionDebugEnabled || !Engine.chartLoader.chart) return;
+
+        context.font = '12px monospace';
+
+        for (let ptr = Math.max(Engine.chartExecutor.pointer - 10, 0); ptr < Math.min(Engine.chartExecutor.pointer + 10, Engine.chartLoader.chart!.instructions.length); ptr++) {
+            context.fillStyle = ptr < Engine.chartExecutor.pointer ? '#888' : ptr === Engine.chartExecutor.pointer ? '#fff' : '#444';
+            context.fillText(`${ptr.toString().padEnd(4)} ${Engine.chartLoader.chart!.instructions[ptr].raw}`, 10, Engine.renderer.getCanvas().height - 300 + (ptr - Engine.chartExecutor.pointer) * 20);
+        }
+
     }
 
     public static profile(step: ProfilerStep) {
