@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./style.css" />
+		<script src="./index.ts" type="module" defer></script>
+		<title>rytm</title>
+	</head>
+	<body>
+		<canvas id="app"> Your browser does not support the HTML5 canvas element. </canvas>
+
+		<noscript>
+			<div class="float">
+				<h1>rytm</h1>
+				<p>This application requires JavaScript to run.</p>
+			</div>
+		</noscript>
+
+		<!-- Main menu -->
+
+		<div id="menu_mainmenu" class="menu disabled">
+			<div class="float">
+				<div class="title-container">
+					<h1>rytm</h1>
+					<h5>demo | main</h5>
+				</div>
+
+				<div class="buttonstack">
+					<button data-menu="mainmenu" data-action="start">start</button>
+					<button data-menu="mainmenu" data-action="settings">settings</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Settings menu -->
+
+		<div id="menu_settings" class="menu disabled">
+			<div class="float">
+				<div class="title-container">
+					<h1>rytm</h1>
+					<h5>demo | settings</h5>
+				</div>
+
+				<div class="buttonstack">
+					<!-- Volume -->
+
+					<div class="slider-container">
+						<label for="volume">volume</label>
+						<input type="range" id="volume" name="volume" min="0" max="100" value="100" class="slider" />
+					</div>
+
+					<!-- mouse sensitivity -->
+
+					<div class="sslider-container">
+						<label for="sensitivity">mouse sensitivity</label>
+						<input
+							type="range"
+							id="sensitivity"
+							name="sensitivity"
+							min="0.1"
+							max="2"
+							value="0.7"
+							class="slider"
+						/>
+					</div>
+
+					<button data-menu="settings" data-action="back">back</button>
+					<button data-menu="settings" data-action="reset">reset</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="menu_game" class="menu disabled"></div>
+	</body>
+</html>

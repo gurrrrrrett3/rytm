@@ -1,0 +1,43 @@
+# load meta data
+
+META title KATAMARI
+META artist femtanyl
+META difficulty 1
+META author gart
+META preview 30
+META bpm 170
+META path /music/katamari.mp3
+
+# map data
+
+# init
+
+INTENSITY 0.8
+
+# intro
+
+BEAT 32
+INTENSITY 1
+
+BEAT 28
+INTENSITY 0.5
+BEAT 4 # 64
+INTENSITY 2
+
+
+BEAT 36 # 100
+INTENSITY 0.5
+
+BEAT 4 # 104
+INTENSITY 2
+
+BEAT 6 # 110
+INTENSITY 0.5
+
+BEAT 2 # 114
+INTENSITY 2
+
+BEAT 14 # 128
+INTENSITY 1
+
+
