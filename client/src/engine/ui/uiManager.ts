@@ -54,6 +54,9 @@ export default class UiManager {
                 return (v * this.playfieldScale) + this.playfieldOffset.x;
             case Axis.Y:
                 return (v * this.playfieldScale) + this.playfieldOffset.y;
+            case Axis.W:
+            case Axis.H:
+                return v * this.playfieldScale;
         }
 
     }

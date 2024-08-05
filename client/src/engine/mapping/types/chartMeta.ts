@@ -9,6 +9,7 @@ export interface ChartMeta {
     version: string
     preview: string
     songId: string
+    path: string // temp value for demo
     bpm: number
     offset: number
     duration: number

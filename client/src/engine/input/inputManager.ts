@@ -1,9 +1,11 @@
 import Engine from "../core/engine";
 import Debug from "../util/debug/debug";
 import DefaultMouseCursor from "./cursors/default";
+import { InputKey } from "./enum/inputKey";
 import { KeyboardInputMode, MouseInputMode } from "./enum/inputMode";
 import KeyboardShortcuts from "./keyboardShortcuts";
 import MouseCursor from "./mouseCursor";
+import NoteHandler from "./rhythm/noteHandler";
 
 export default class InputManager {
 
@@ -24,6 +26,11 @@ export default class InputManager {
     public keyboardState: { [key: string]: boolean } = {};
     public keyboardShortcuts: { [key: string]: () => void } = {};
 
+    public noteHandler: NoteHandler = new NoteHandler();
+
+    public keyOne: string = 'z';
+    public keyTwo: string = 'x';
+
     constructor() {
         window.addEventListener('mousemove', this.onMouseMove.bind(this));
         window.addEventListener('mousedown', this.onMouseDown.bind(this));
@@ -36,7 +43,7 @@ export default class InputManager {
     }
 
     public update(delta: number): void {
-
+        this.noteHandler.update();
     }
 
     public render(context: CanvasRenderingContext2D): void {
@@ -142,6 +149,8 @@ export default class InputManager {
         this.keyboardState[event.key] = true;
 
         KeyboardShortcuts.handleShortcut(this.keyboardState, event);
+
+        this.noteHandler.handleKeyDown(event.key === this.keyOne ? InputKey.KeyOne : event.key === this.keyTwo ? InputKey.KeyTwo : InputKey.None);
     }
 
     private onKeyUp(event: KeyboardEvent): void {

@@ -1,34 +1,24 @@
 import Engine from "../core/engine";
 import Song from "./song";
-import Song_femtanyl_KATAMARI from "./songs/femtanyl_katamari";
-import Song_goreshit_FineNight from "./songs/goreshit_fineNight";
 import AudioVisualizer from "./visualizer/audioVisualizer";
 
 export default class AudioManager {
 
-    public readonly songs = {
-        finenight: new Song_goreshit_FineNight(),
-        katamari: new Song_femtanyl_KATAMARI()
-    }
-
-    public currentSong: Song = this.songs.katamari;
+    public currentSong: Song;
     public audio: HTMLAudioElement;
-
 
     public audioVisualizer: AudioVisualizer;
     public audioContext: AudioContext = new AudioContext();
 
     public async init(): Promise<void> {
         this.audio = await this.currentSong.load();
-        this.audio.volume = 0.05
+        this.audio.volume = 0.1
 
         const audioSource = this.audioContext.createMediaElementSource(this.audio);
         this.audioVisualizer = new AudioVisualizer(this.audioContext, audioSource);
 
         setTimeout(() => {
             this.play();
-            Engine.chartExecutor.execute(Engine.chartLoader.chart);
-
         }, 3000);
     }
 
@@ -46,8 +36,12 @@ export default class AudioManager {
         return this.currentTime * 1000;
     }
 
+    public get currentBeat(): number {
+        return this.currentSong ? this.currentTimeMs / this.currentSong.beatTime : 0;
+    }
+
     public get duration(): number {
-        return this.audio.duration;
+        return this.audio ? this.audio.duration : 0;
     }
 
     public play(): void {
@@ -63,7 +57,7 @@ export default class AudioManager {
     }
 
     public get dataString() {
-        return this.currentSong.loaded ? `${this.currentSong.title} - ${this.currentSong.artist} | ${this.currentTime.toFixed(2)} / ${this.duration.toFixed(2)} | ${this.currentSong.beatIndex}` : 'Loading...';
+        return this.currentSong ? `${this.currentSong.title} - ${this.currentSong.artist} | ${this.currentTime.toFixed(2)} / ${this.duration.toFixed(2)} | ${this.currentSong.beatIndex}` : 'Loading...';
     }
 
 }

@@ -1,4 +1,6 @@
 export enum Axis {
     X,
-    Y
+    Y,
+    W,
+    H
 }

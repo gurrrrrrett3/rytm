@@ -1,5 +1,5 @@
-import Chart from "../chart";
-import Instruction from "../instruction";
+import Chart from "../chart/chart";
+import Instruction from "../baseInstructions/instruction";
 
 /**
  * Waits for a certain number of beats before executing the next instruction
@@ -16,10 +16,11 @@ export default class BeatInstruction extends Instruction {
     }
 
     public load(chart: Chart, args: string[]): void {
-        this.beatsToWait = parseInt(args[0]);
+        this.beatsToWait = parseFloat(args[0]) || 0;
     }
 
     public execute(chart: Chart): void {
-        console.log(`Waiting for ${this.beatsToWait} beats`);
+        // only needed to build queue on load,
+        // so nothing to execute here
     }
 }

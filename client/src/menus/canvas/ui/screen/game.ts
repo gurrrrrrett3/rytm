@@ -1,4 +1,5 @@
 import UiScreen from "../../../../engine/ui/uiScreen";
+import SongTitle from "../component/songtitle";
 import StatusBar from "../component/statusbar";
 
 export default class Screen_Game extends UiScreen {
@@ -6,7 +7,8 @@ export default class Screen_Game extends UiScreen {
         super('game');
 
         this.add(
-            new StatusBar()
+            new StatusBar(),
+            new SongTitle()
         )
 
     }

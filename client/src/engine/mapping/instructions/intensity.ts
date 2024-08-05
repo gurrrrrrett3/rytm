@@ -1,5 +1,5 @@
 import Engine from "../../core/engine";
-import Instruction from "../instruction";
+import Instruction from "../baseInstructions/instruction";
 
 export default class IntensityInstruction extends Instruction {
     public static readonly id = 'intensity';

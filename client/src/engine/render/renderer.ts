@@ -51,13 +51,16 @@ export default class Renderer {
         Debug.setLiveDebugValue("fps", this.fps.toFixed(2));
         Debug.setLiveDebugValue("delta", this.delta.toFixed(2));
 
-        Engine.chartExecutor.render(this.context);
         Engine.audioManager.render(this.context);
+
+        if (Engine.chartLoader.currentMode) {
+            Engine.chartLoader.currentMode.render(this.context);
+        }
+
         Engine.uiManager.render(this.context);
         Engine.inputManager.render(this.context);
 
-        Debug.renderLiveDebugValues(this.context);
-        Debug.renderInstructionDebug(this.context);
+        Debug.renderDebug(this.context);
 
         Debug.profile(ProfilerStep.EndFrame)
 
@@ -85,7 +88,8 @@ export default class Renderer {
     }
 
     public clear(): void {
-        this.context.fillStyle = GradientStorage.gradients.bgBeat.getGradient(Engine.audioManager.currentSong.timeUntilNextBeatPercent * Engine.uiManager.beatIntensity / 2)
+        this.context.fillStyle = Engine.audioManager.currentSong ? GradientStorage.gradients.bgBeat.getGradient(Engine.audioManager.currentSong.timeUntilNextBeatPercent * Engine.uiManager.beatIntensity / 2) : "#000";
+
         this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 

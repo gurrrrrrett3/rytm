@@ -1,5 +1,5 @@
-import Chart from "../chart";
-import Instruction from "../instruction";
+import Chart from "../chart/chart";
+import Instruction from "../baseInstructions/instruction";
 
 export default class MetaInstruction extends Instruction {
     public static readonly id = 'meta';
@@ -14,7 +14,7 @@ export default class MetaInstruction extends Instruction {
 
         chart.meta[key] = value;
 
-        console.log(`Set meta key ${key} to value ${value}`);
+        // console.debug(`Set meta key ${key} to value ${value}`);
     }
 
     public execute(chart: Chart): void {

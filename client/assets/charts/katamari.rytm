@@ -16,16 +16,119 @@ INTENSITY 0.8
 
 # intro
 
-BEAT 32
+BEAT 24
+MODE okb # single key bars
+
+BEAT 8
 INTENSITY 1
 
-BEAT 28
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 36
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 40
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 44
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 48
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# ==  52
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 56
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+NOTE
+BEAT
+
+# == 60
+
+MODE tkb # two key bars
 INTENSITY 0.5
+
 BEAT 4 # 64
 INTENSITY 2
 
+BEAT 16 
 
-BEAT 36 # 100
+BEAT 20 # 100
 INTENSITY 0.5
 
 BEAT 4 # 104

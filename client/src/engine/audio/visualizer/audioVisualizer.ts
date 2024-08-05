@@ -23,14 +23,14 @@ export default class AudioVisualizer {
 
         this.analyser.getByteFrequencyData(this.dataArray);
 
-        const barWidth = (Engine.uiManager.playfieldScreenSize.width / this.bufferLength) * 2.5;
+        const barWidth = (Engine.uiManager.playfieldScreenSize.width / this.bufferLength)
         let x = Engine.uiManager.playfieldOffset.x;
 
         this.dataArray.forEach((data, i) => {
-            const barHeight = data
+            const barHeight = data / 90 * Engine.uiManager.playfieldScreenSize.height * 0.1
 
             context.fillStyle = `rgb(${data},${data},${data})`;
-            context.fillRect(x, 0, barWidth, barHeight);
+            context.fillRect(x, Engine.uiManager.playfieldOffset.y, barWidth, barHeight);
 
             x += barWidth + 1;
         });

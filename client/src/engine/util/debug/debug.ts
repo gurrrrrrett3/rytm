@@ -28,6 +28,12 @@ export default class Debug {
         };
     }
 
+    public static renderDebug(context: CanvasRenderingContext2D) {
+        this.renderLiveDebugValues(context);
+        this.renderInstructionDebug(context);
+        this.renderNoteHitDebug(context);
+    }
+
     public static renderLiveDebugValues(context: CanvasRenderingContext2D) {
         if (!this.enabled) return;
 
@@ -51,12 +57,31 @@ export default class Debug {
 
         context.font = '12px monospace';
 
-        for (let ptr = Math.max(Engine.chartExecutor.pointer - 10, 0); ptr < Math.min(Engine.chartExecutor.pointer + 10, Engine.chartLoader.chart!.instructions.length); ptr++) {
-            context.fillStyle = ptr < Engine.chartExecutor.pointer ? '#888' : ptr === Engine.chartExecutor.pointer ? '#fff' : '#444';
-            context.fillText(`${ptr.toString().padEnd(4)} ${Engine.chartLoader.chart!.instructions[ptr].raw}`, 10, Engine.renderer.getCanvas().height - 300 + (ptr - Engine.chartExecutor.pointer) * 20);
+        for (let ptr = Math.max(Engine.chartLoader.chart.queue.pointer - 10, 0); ptr < Math.min(Engine.chartLoader.chart.queue.pointer + 10, Engine.chartLoader.chart!.queue.stack.length); ptr++) {
+            context.fillStyle = ptr < Engine.chartLoader.chart.queue.pointer ? '#888' : ptr === Engine.chartLoader.chart.queue.pointer ? '#fff' : '#444';
+            context.fillText(`${ptr.toString().padEnd(4)} ${Engine.chartLoader.chart!.queue.stack[ptr].instruction.raw || `$${Engine.chartLoader.chart!.queue.stack[ptr].instruction.instruction}`}`, 10, Engine.renderer.getCanvas().height - 300 + (ptr - Engine.chartLoader.chart.queue.pointer) * 20);
         }
+    }
+
+    public static renderNoteHitDebug(context: CanvasRenderingContext2D) {
+        if (!this.enabled) return;
+
+        // context.fillStyle = '#f00';
+        // context.fillRect(10, Engine.renderer.getCanvas().height - 600, 100, 100);
+
+        Engine.inputManager.noteHandler.currentNotes.forEach(note => {
+
+            const y = Engine.renderer.getCanvas().height - 600 + (note.startBeatTime - Engine.audioManager.currentBeat) * 5;
+
+            context.fillStyle = Engine.audioManager.currentBeat > note.startBeatTime && Engine.audioManager.currentBeat < note.endBeatTime ? '#0f0' : '#f00';
+            context.fillRect(10, y, 100, 2);
+
+        })
+
 
     }
+
+
 
     public static profile(step: ProfilerStep) {
         performance.mark(step);

@@ -5,7 +5,10 @@ export default class KeyboardShortcuts {
     public static readonly shortcuts: { [key: string]: () => void | Promise<void> } = {
         "right": () => {
             Engine.audioManager.seek(Engine.audioManager.audio.currentTime + 5);
-        }
+        },
+        "left": () => {
+            Engine.audioManager.seek(Engine.audioManager.audio.currentTime - 5);
+        },
     }
 
     public static readonly shorthands: { [key: string]: string } = {
